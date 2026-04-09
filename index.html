@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>p5.js Exhibition</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- p5.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <!-- p5.FIP -->
+  <script src="https://prontopablo.github.io/p5.FIP/assets/javascripts/p5.FIP.js"></script>
+  <!-- QR Code -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- CodeMirror 6 (ESM importmap) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "codemirror": "https://esm.sh/codemirror@6.0.1",
+      "@codemirror/view": "https://esm.sh/@codemirror/view@6",
+      "@codemirror/state": "https://esm.sh/@codemirror/state@6",
+      "@codemirror/lang-javascript": "https://esm.sh/@codemirror/lang-javascript@6",
+      "@codemirror/language": "https://esm.sh/@codemirror/language@6",
+      "@codemirror/commands": "https://esm.sh/@codemirror/commands@6",
+      "@lezer/highlight": "https://esm.sh/@lezer/highlight@1"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- p5.js 全画面背景 -->
+  <div id="p5-canvas-container"></div>
+
+  <!-- コードエディタ (前面) -->
+  <div id="code-panel">
+    <div id="editor-wrap"></div>
+  </div>
+
+  <!-- QRパネル -->
+  <div id="qr-panel">
+    <img id="qr-icon" src="icon.png" alt="レオナ">
+    <div id="qr-name">レオナ</div>
+    <div id="qr-box"></div>
+    <div id="qr-handle">@reona396</div>
+    <div id="qr-url">https://x.com/reona396</div>
+  </div>
+
+  <!-- コントロール -->
+  <div id="control-bar">
+    <button class="btn" id="run-btn">▶ Run</button>
+    <button class="btn" id="qr-btn">QR</button>
+    <button class="btn" id="fs-btn">⛶</button>
+  </div>
+
+  <div id="error-toast"></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
