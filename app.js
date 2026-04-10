@@ -26,8 +26,15 @@ const myHighlight = HighlightStyle.define([
   { tag: tags.null,                        color: '#bd93f9' },
 ]);
 
-// ===== sketch.js を fetch して初期コードとして読み込む =====
-const DEFAULT_CODE = await fetch('sketch.js').then(r => r.text());
+// ===== スケッチ一覧 =====
+const SKETCHES = [
+  { label: 'Cube',  file: 'sketch_cube.js'  },
+  { label: 'Chase', file: 'sketch_chase.js' },
+  { label: 'Line',  file: 'sketch_line.js'  },
+];
+
+// ===== 初期スケッチ (Cube) を fetch =====
+const DEFAULT_CODE = await fetch(SKETCHES[0].file).then(r => r.text());
 
 // ===== CodeMirror 6 セットアップ =====
 const view = new EditorView({
@@ -149,3 +156,25 @@ document.addEventListener('fullscreenchange', () => {
 
 // ===== 初回実行 =====
 runSketch(DEFAULT_CODE);
+
+// ===== スケッチ切り替えボタン =====
+document.querySelectorAll('.sketch-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    // アクティブ切り替え
+    document.querySelectorAll('.sketch-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // そのファイルだけ fetch して読み込む
+    const file = btn.dataset.file;
+    try {
+      const code = await fetch(file).then(r => r.text());
+      // エディタの内容を差し替え
+      view.dispatch({
+        changes: { from: 0, to: view.state.doc.length, insert: code },
+      });
+      runSketch(code);
+    } catch (e) {
+      showError('Failed to load ' + file);
+    }
+  });
+});

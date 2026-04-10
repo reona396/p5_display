@@ -50,9 +50,16 @@
 
   <!-- コントロール -->
   <div id="control-bar">
-    <button class="btn" id="run-btn">▶ Run</button>
-    <button class="btn" id="qr-btn">QR</button>
-    <button class="btn" id="fs-btn">⛶</button>
+    <div id="sketch-bar">
+      <button class="btn sketch-btn active" data-file="sketch_cube.js">Cube</button>
+      <button class="btn sketch-btn" data-file="sketch_chase.js">Chase</button>
+      <button class="btn sketch-btn" data-file="sketch_line.js">Line</button>
+    </div>
+    <div id="action-bar">
+      <button class="btn" id="run-btn">▶ Run</button>
+      <button class="btn" id="qr-btn">QR</button>
+      <button class="btn" id="fs-btn">⛶</button>
+    </div>
   </div>
 
   <div id="error-toast"></div>
