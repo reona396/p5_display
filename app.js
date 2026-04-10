@@ -150,7 +150,6 @@ fsBtn.addEventListener('click', () => {
 document.addEventListener('fullscreenchange', () => {
   const full = !!document.fullscreenElement;
   fsBtn.classList.toggle('active', full);
-  fsBtn.textContent = full ? '✕' : '⛶';
   setTimeout(() => runSketch(view.state.doc.toString()), 100);
 });
 
