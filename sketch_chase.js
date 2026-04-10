@@ -35,7 +35,6 @@ function draw() {
   }
 }
 
-//Steering Behavior（操舵行動）を扱うクラス
 class MovingObj {
   constructor() {
     this.init();
@@ -45,7 +44,7 @@ class MovingObj {
     this.pos = createVector(
       random(-width * 0.1, width * 1.1),
       random(-height * 0.1, height * 1.1),
-    ); //位置
+    );
     while (
       this.pos.x >= 0 &&
       this.pos.x <= width &&
@@ -55,15 +54,14 @@ class MovingObj {
       this.pos = createVector(
         random(-width * 0.1, width * 1.1),
         random(-height * 0.1, height * 1.1),
-      ); //位置
+      );
     }
-    this.vel = createVector(0, 0); //速度
-    this.acc = createVector(0, 0); //加速度
-    this.maxspeed = random(8, 15); //最大スピード
-    this.maxsteer = random(0.1, 0.75); //旋回力 大きいほど舵を切りやすい
+    this.vel = createVector(0, 0);
+    this.acc = createVector(0, 0);
+    this.maxspeed = random(8, 15);
+    this.maxsteer = random(0.1, 0.75);
     this.desired = createVector();
 
-    // targetObjsの中で一番近いものを探す
     this.targetObj = this.findNearestTarget();
 
     this.shapeScale = random(1, 4);
@@ -76,30 +74,24 @@ class MovingObj {
   move() {
     this.targetObj = this.findNearestTarget();
 
-    this.vel.add(this.acc); //速度に加速度をプラス
-    this.pos.add(this.vel); //位置に速度をプラス
+    this.vel.add(this.acc);
+    this.pos.add(this.vel);
     this.acc.mult(0);
   }
 
-  //操舵行動 追跡(seek)
   seek() {
     let target = this.targetObj.pos;
-    //希望ベクトル = 目標位置 - 現在位置
+
     this.desired = p5.Vector.sub(target, this.pos);
 
-    //希望ベクトルをノーマライズ
     this.desired.normalize();
 
-    //希望ベクトルのマグニチュードをmaxに
     this.desired.setMag(this.maxspeed);
 
-    //ステアリングベクトル（速度） = 希望ベクトル - 現在のベクトル（速度）
     var steer = p5.Vector.sub(this.desired, this.vel);
 
-    //速度を限る
     steer.limit(this.maxsteer);
 
-    //適用
     this.applyForce(steer);
   }
 
@@ -117,9 +109,7 @@ class MovingObj {
     this.acc.add(force);
   }
 
-  // targetObjsの中で一番近いものを探す
   findNearestTarget() {
-    // targetObjsの中で一番近いものを探す
     let minDist = 100000;
     let minIndex = 0;
     for (let i = 0; i < targetObjs.length; i++) {

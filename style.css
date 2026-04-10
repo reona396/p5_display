@@ -23,7 +23,7 @@ html, body {
 #code-panel {
   position: fixed;
   top: 0; left: 0;
-  width: 100%; height: 100%;
+  width: 80%; height: 100%;
   display: flex;
   flex-direction: column;
   background: transparent;
@@ -147,7 +147,7 @@ html, body {
 
 /* カーソル行の強調なし */
 .cm-editor .cm-activeLine {
-  background: rgba(0, 0, 0, 0.40) !important;
+  background: rgba(0, 0, 0, 0.60) !important;
 }
 
 /* 選択範囲 */
